@@ -28,7 +28,12 @@ class QuotetutorialPipeline:
 
         cursor = self.db.cursor()
         query = """insert into crawl_test values (%s,%s,%s)"""
-        data = (item['quote'], item['author'], item['tags'][0])
+        tag = 'NA'
+        try:
+            tag = item['tags'][0]
+        except:
+            pass
+        data = (item['quote'], item['author'], tag)
         cursor.execute(query, data)
         self.db.commit()
         cursor.close()
